@@ -17,3 +17,5 @@ migratedown:
 	migrate -path db/migrations -database "postgresql://root:password@localhost:5433/go-chat?sslmode=disable" -verbose down
 
 .PHONY: postgresinit postgres createdb dropdb migrateup migratedown
+
+# docker start postgres15 <- because it was stopping
