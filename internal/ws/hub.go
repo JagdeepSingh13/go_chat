@@ -34,11 +34,8 @@ func (h *Hub) Run() {
 				}
 			}
 		case cl := <-h.Unregister:
-			// check if room exists
 			if _, ok := h.Rooms[cl.RoomID]; ok {
-				// check if client exists in that room
 				if _, ok := h.Rooms[cl.RoomID].Clients[cl.ID]; ok {
-					// broadcast client left room
 					if len(h.Rooms[cl.RoomID].Clients) != 0 {
 						h.Broadcast <- &Message{
 							Content:  "user left the chat",
@@ -51,12 +48,12 @@ func (h *Hub) Run() {
 					close(cl.Message)
 				}
 			}
+
 		case m := <-h.Broadcast:
 			if _, ok := h.Rooms[m.RoomID]; ok {
-				for {
-					for _, cl := range h.Rooms[m.RoomID].Clients {
-						cl.Message <- m
-					}
+
+				for _, cl := range h.Rooms[m.RoomID].Clients {
+					cl.Message <- m
 				}
 			}
 		}

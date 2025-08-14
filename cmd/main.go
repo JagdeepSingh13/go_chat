@@ -19,8 +19,8 @@ func main() {
 	userHandler := user.NewHandler(userSrv)
 
 	hub := ws.NewHub()
-	wsHandler := ws.NewHandler(hub)
 	go hub.Run()
+	wsHandler := ws.NewHandler(hub)
 
 	router.InitRouter(userHandler, wsHandler)
 	router.Start("0.0.0.0:8080")
