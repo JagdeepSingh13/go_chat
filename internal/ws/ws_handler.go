@@ -91,6 +91,7 @@ type RoomRes struct {
 	Name string `json:"name"`
 }
 
+// need to make rooms every time server closes
 func (h *Handler) GetRooms(c *gin.Context) {
 	rooms := make([]RoomRes, 0)
 
